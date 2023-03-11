@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Invoice{% endblock %}
+
+{% block body %}
+    <h1>Invoice</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ invoice.id }}</td>
+            </tr>
+            <tr>
+                <th>Customer Id</th>
+                <td>{{ invoice.customer.id }}</td>
+            </tr>
+                        <tr>
+                <th>Customer Name</th>
+                <td>{{ invoice.customer.name }}</td>
+            </tr>
+            <tr>
+                <th>Staff Id</th>
+                <td>{{ invoice.staff.id }}</td>
+            </tr>
+                        <tr>
+                <th>Staff Name</th>
+                <td>{{ invoice.staff.name }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ invoice.date ? invoice.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_invoice_index') }}">back to list</a>
+
+    <a href="{{ path('app_invoice_edit', {'id': invoice.id}) }}">edit</a>
+
+    {{ include('invoice/_delete_form.html.twig') }}
+{% endblock %}

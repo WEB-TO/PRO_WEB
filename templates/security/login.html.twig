@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<head>
+    <title>Log In</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="icon" href="img/muszoid-removebg-preview1.png">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+<form method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+<section class="position-relative py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-lg-5 me-auto mb-5">
+              <div class="text-center py-5">
+                <h3 class="fw-bold mb-5">Log in with your existing account</h3>
+                <div class="row mb-2">
+                  <div class="col-12 col-md-6 mb-2 mb-lg-0"></div>                  
+                  <div class="col-12 col-md-6"></div>           
+                </div>
+                 <input class="form-control mb-3" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder = "Email" required autofocus>
+                <input  class="form-control mb-3" type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" placeholder = "Password" required>
+                <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >                   
+                <button class="btn btn-primary py-2 w-100 mb-3" type="submit">Log In</button>
+                <p class="text-muted"><span><small>Haven't had an account yet?</small></span> <a href="{{ path('app_register') }}">Sign Up Now</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="d-none d-lg-block position-absolute top-0 end-0 bottom-0 w-50" style="background-image: url('image/bg.jpg'); background-repeat: no-repeat; background-size: cover;"></div>
+        </div>
+      </section>
+    {#
+        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+        See https://symfony.com/doc/current/security/remember_me.html
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me"> Remember me
+            </label>
+        </div>
+    #}
+</form>
+<script src="js/bootstrap/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}
